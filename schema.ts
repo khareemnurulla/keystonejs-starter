@@ -139,4 +139,30 @@ export const lists: Lists = {
       posts: relationship({ ref: 'Post.tags', many: true }),
     },
   }),
+  Pool: list({
+    // Here are the fields that `User` will have. We want an email and password so they can log in
+    // a name so we can refer to them, and a way to connect users to posts.
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      pool_id: text({ validation: { isRequired: true } }),
+      db_ticker: text({ validation: { isRequired: true } }),
+      db_name: text({ validation: { isRequired: true } }),
+      db_url: text({ validation: { isRequired: true } }),
+      roa: text({ validation: { isRequired: true } }),
+      roa_lifetime: text({ validation: { isRequired: true } }),
+      total_stake: text({ validation: { isRequired: true } }),
+      luck_lifetime: text({ validation: { isRequired: true } }),
+      blocks_epoch: text({ validation: { isRequired: true } }),
+      blocks_lifetime: text({ validation: { isRequired: true } }),
+      tax_ratio: text({ validation: { isRequired: true } }),
+      tax_fix: text({ validation: { isRequired: true } }),
+      pledge: text({ validation: { isRequired: true } }),
+    },
+    // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
+    ui: {
+      listView: {
+        initialColumns: ['name', 'pool_id', 'db_ticker'],
+      },
+    },
+  }),
 };

@@ -303,6 +303,106 @@ input TagCreateInput {
   posts: PostRelateToManyForCreateInput
 }
 
+type Pool {
+  id: ID!
+  name: String
+  pool_id: String
+  db_ticker: String
+  db_name: String
+  db_url: String
+  roa: String
+  roa_lifetime: String
+  total_stake: String
+  luck_lifetime: String
+  blocks_epoch: String
+  blocks_lifetime: String
+  tax_ratio: String
+  tax_fix: String
+  pledge: String
+}
+
+input PoolWhereUniqueInput {
+  id: ID
+}
+
+input PoolWhereInput {
+  AND: [PoolWhereInput!]
+  OR: [PoolWhereInput!]
+  NOT: [PoolWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  pool_id: StringFilter
+  db_ticker: StringFilter
+  db_name: StringFilter
+  db_url: StringFilter
+  roa: StringFilter
+  roa_lifetime: StringFilter
+  total_stake: StringFilter
+  luck_lifetime: StringFilter
+  blocks_epoch: StringFilter
+  blocks_lifetime: StringFilter
+  tax_ratio: StringFilter
+  tax_fix: StringFilter
+  pledge: StringFilter
+}
+
+input PoolOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  pool_id: OrderDirection
+  db_ticker: OrderDirection
+  db_name: OrderDirection
+  db_url: OrderDirection
+  roa: OrderDirection
+  roa_lifetime: OrderDirection
+  total_stake: OrderDirection
+  luck_lifetime: OrderDirection
+  blocks_epoch: OrderDirection
+  blocks_lifetime: OrderDirection
+  tax_ratio: OrderDirection
+  tax_fix: OrderDirection
+  pledge: OrderDirection
+}
+
+input PoolUpdateInput {
+  name: String
+  pool_id: String
+  db_ticker: String
+  db_name: String
+  db_url: String
+  roa: String
+  roa_lifetime: String
+  total_stake: String
+  luck_lifetime: String
+  blocks_epoch: String
+  blocks_lifetime: String
+  tax_ratio: String
+  tax_fix: String
+  pledge: String
+}
+
+input PoolUpdateArgs {
+  where: PoolWhereUniqueInput!
+  data: PoolUpdateInput!
+}
+
+input PoolCreateInput {
+  name: String
+  pool_id: String
+  db_ticker: String
+  db_name: String
+  db_url: String
+  roa: String
+  roa_lifetime: String
+  total_stake: String
+  luck_lifetime: String
+  blocks_epoch: String
+  blocks_lifetime: String
+  tax_ratio: String
+  tax_fix: String
+  pledge: String
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -330,6 +430,12 @@ type Mutation {
   updateTags(data: [TagUpdateArgs!]!): [Tag]
   deleteTag(where: TagWhereUniqueInput!): Tag
   deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createPool(data: PoolCreateInput!): Pool
+  createPools(data: [PoolCreateInput!]!): [Pool]
+  updatePool(where: PoolWhereUniqueInput!, data: PoolUpdateInput!): Pool
+  updatePools(data: [PoolUpdateArgs!]!): [Pool]
+  deletePool(where: PoolWhereUniqueInput!): Pool
+  deletePools(where: [PoolWhereUniqueInput!]!): [Pool]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -384,6 +490,14 @@ type Query {
   ): [Tag!]
   tag(where: TagWhereUniqueInput!): Tag
   tagsCount(where: TagWhereInput! = {}): Int
+  pools(
+    where: PoolWhereInput! = {}
+    orderBy: [PoolOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Pool!]
+  pool(where: PoolWhereUniqueInput!): Pool
+  poolsCount(where: PoolWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
