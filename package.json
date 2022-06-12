@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "keystone dev",
-    "start": "keystone start",
-    "build": "keystone build",
+    "start": "keystone dev",
     "postinstall": "keystone postinstall"
   },
   "dependencies": {
